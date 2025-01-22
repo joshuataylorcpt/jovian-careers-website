@@ -20,6 +20,11 @@ def contact():
     # For GET requests, just render the contact form
     return render_template('contact.html')
 
+@app.route('/ourservices')
+def our_services():
+    return render_template('ourservices.html')
+
+
 # Ensure app runs on the specified host and port, with debug mode enabled
 
 @app.route('/thank_you')

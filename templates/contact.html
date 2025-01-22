@@ -58,16 +58,44 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="phone" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+                        <label for="unitSize" class="form-label">Unit Size (m²)</label>
+                        <input type="number" class="form-control" id="unitSize" name="unitSize" placeholder="Enter the unit size (1-11 m²)" min="1" max="11" required>
                     </div>
                     <div class="mb-3">
-                        <label for="moveDate" class="form-label">Preferred Moving Date</label>
-                        <input type="date" class="form-control" id="moveDate" name="moveDate" required>
+                        <label for="startingPoint" class="form-label">Starting Point</label>
+                        <select class="form-control" id="startingPoint" name="startingPoint">
+                            <option value="">Select a starting point</option>
+                            <option value="Flexistore">Flexistore Branch</option>
+                            <option value="Own Location">Own Location</option>
+                        </select>
+                        <div id="startingPointDetails" style="display: none; margin-top: 10px;">
+                            <label for="startingPointLocation" class="form-label">Specify Starting Point</label>
+                            <select class="form-control" id="startingPointLocation" name="startingPointLocation">
+                                <option value="">Select a Flexistore branch</option>
+                                <option value="Belleville">Belleville</option>
+                                <option value="Stellenbosch">Stellenbosch</option>
+                                <option value="Paarl">Paarl</option>
+                            </select>
+                            <input type="text" class="form-control" id="startingOwnLocation" name="startingOwnLocation" placeholder="Enter your location" style="display: none; margin-top: 10px;">
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Brief Description of the items for transport</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Type your message here" required></textarea>
+                        <label for="destination" class="form-label">Destination</label>
+                        <select class="form-control" id="destination" name="destination">
+                            <option value="">Select a destination</option>
+                            <option value="Flexistore">Flexistore Branch</option>
+                            <option value="Own Location">Own Location</option>
+                        </select>
+                        <div id="destinationDetails" style="display: none; margin-top: 10px;">
+                            <label for="destinationLocation" class="form-label">Specify Destination</label>
+                            <select class="form-control" id="destinationLocation" name="destinationLocation">
+                                <option value="">Select a Flexistore branch</option>
+                                <option value="Belleville">Belleville</option>
+                                <option value="Stellenbosch">Stellenbosch</option>
+                                <option value="Paarl">Paarl</option>
+                            </select>
+                            <input type="text" class="form-control" id="destinationOwnLocation" name="destinationOwnLocation" placeholder="Enter your location" style="display: none; margin-top: 10px;">
+                        </div>
                     </div>
 
                     <!-- Submit Button with Loading Spinner -->
@@ -110,6 +138,45 @@
                 submitButton.disabled = false;
                 loadingSpinner.style.display = 'none';
             });
+        });
+
+        // Handle the starting point selection change
+        const startingPoint = document.getElementById('startingPoint');
+        const startingPointDetails = document.getElementById('startingPointDetails');
+        const startingPointLocation = document.getElementById('startingPointLocation');
+        const startingOwnLocation = document.getElementById('startingOwnLocation');
+
+        const destination = document.getElementById('destination');
+        const destinationDetails = document.getElementById('destinationDetails');
+        const destinationLocation = document.getElementById('destinationLocation');
+        const destinationOwnLocation = document.getElementById('destinationOwnLocation');
+
+        startingPoint.addEventListener('change', () => {
+            if (startingPoint.value === 'Flexistore') {
+                startingPointDetails.style.display = 'block';
+                startingPointLocation.style.display = 'block';
+                startingOwnLocation.style.display = 'none';
+            } else if (startingPoint.value === 'Own Location') {
+                startingPointDetails.style.display = 'block';
+                startingPointLocation.style.display = 'none';
+                startingOwnLocation.style.display = 'block';
+            } else {
+                startingPointDetails.style.display = 'none';
+            }
+        });
+
+        destination.addEventListener('change', () => {
+            if (destination.value === 'Flexistore') {
+                destinationDetails.style.display = 'block';
+                destinationLocation.style.display = 'block';
+                destinationOwnLocation.style.display = 'none';
+            } else if (destination.value === 'Own Location') {
+                destinationDetails.style.display = 'block';
+                destinationLocation.style.display = 'none';
+                destinationOwnLocation.style.display = 'block';
+            } else {
+                destinationDetails.style.display = 'none';
+            }
         });
     </script>
 </body>
